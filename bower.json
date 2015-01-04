@@ -2,7 +2,7 @@
   "name": "markdown-it-sup",
   "main": "dist/markdown-it-sup.js",
   "homepage": "https://github.com/markdown-it/markdown-it-sup",
-  "description": "<ins> tag for markdown-it markdown parser.",
+  "description": "<sup> tag for markdown-it markdown parser.",
   "keywords": [
     "markdown-it-plugin",
     "markdown-it",
