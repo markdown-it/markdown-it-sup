@@ -8,6 +8,7 @@ var UNESCAPE_RE = /\\([ \\!"#$%&'()*+,.\/:;<=>?@[\]^_`{|}~-])/g;
 function superscript(state, silent) {
   var found,
       content,
+      token,
       max = state.posMax,
       start = state.pos;
 
@@ -44,13 +45,14 @@ function superscript(state, silent) {
   state.pos = start + 1;
 
   // Earlier we checked !silent, but this implementation does not need it
-  state.push({ type: 'sup_open', level: state.level++ });
-  state.push({
-    type: 'text',
-    level: state.level,
-    content: content.replace(UNESCAPE_RE, '$1')
-  });
-  state.push({ type: 'sup_close', level: --state.level });
+  token         = state.push('sup_open', 'sup', 1);
+  token.markup  = '^';
+
+  token         = state.push('text', '', 0);
+  token.content = content.replace(UNESCAPE_RE, '$1');
+
+  token         = state.push('sup_close', 'sup', -1);
+  token.markup  = '^';
 
   state.pos = state.posMax + 1;
   state.posMax = max;
@@ -58,12 +60,6 @@ function superscript(state, silent) {
 }
 
 
-function sup_open()  { return '<sup>'; }
-function sup_close() { return '</sup>'; }
-
-
 module.exports = function sup_plugin(md) {
   md.inline.ruler.after('emphasis', 'sup', superscript);
-  md.renderer.rules.sup_open = sup_open;
-  md.renderer.rules.sup_close = sup_close;
 };
