@@ -6,6 +6,8 @@
 
 > Superscript (`<sup>`) tag plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser.
 
+__v1.+ requires `markdown-it` v4.+, see changelog.__
+
 `29^th^` => `29<sup>th</sup>`
 
 Markup is based on [pandoc](http://johnmacfarlane.net/pandoc/README.html#superscripts-and-subscripts) definition. But nested markup is currently not supported.
